@@ -5,6 +5,7 @@ require('config.php');
 
 $username=$_POST['username'];
 $password=$_POST['password'];
+$password = md5($password);  
 
 $login="SELECT * FROM users WHERE username='$username' AND password='$password'";
 $result_login=mysqli_query($db_link, $login); 
