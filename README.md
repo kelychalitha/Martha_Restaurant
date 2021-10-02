@@ -21,4 +21,5 @@ Installation Guide
 Login details
 
 User Name : admin
+
 Password : admin123
