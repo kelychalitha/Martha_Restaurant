@@ -18,5 +18,9 @@ Installation Guide
 
 =============================================================================
 
-Username : waiter
-Password : waiter
+Login details
+
+User Name : admin
+
+Password : admin123
+
