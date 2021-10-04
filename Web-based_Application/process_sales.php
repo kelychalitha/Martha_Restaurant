@@ -1,3 +1,5 @@
+<?php include 'config.php';?>
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
@@ -38,7 +40,7 @@ if(!isset($_SESSION['username'])){
     <td style="font-size:14px;">
       <table width="93%" border="0" cellspacing="0" cellpadding="0">
         <tr>
-        	<th scope="col">Welcome: <?php echo $_SESSION['access'];?></th>
+        	<th scope="col">Welcome: <?php echo $_SESSION['username'];?></th>
           	<th scope="col"><?php
 			$Today = date('y:m:d',time());
 			$new = date('l, F d, Y', strtotime($Today));
@@ -61,7 +63,6 @@ if(!isset($_SESSION['username'])){
   <a href="sales.php">Sales</a>
   <a href="products.php">Products</a>
   <a href="customers.php">Customers</a>
-  <a href="suppliers.php">Suppliers</a>
   <div class="dropdown">
     <button class="dropbtn">Sales Report 
       <i class="fa fa-caret-down"></i>
@@ -85,7 +86,7 @@ if(!isset($_SESSION['username'])){
         </form></td>
       </tr>
     
-    </table></th>
+</table></th>
   </tr>
   <!--Footer-->
   <div id="footer">
@@ -107,7 +108,6 @@ if(!isset($_SESSION['username'])){
     </div>
 
 <?php
-include 'config.php';
 
 $id = $_GET['id'];
 $view = "SELECT * from products where md5(id) = '$id'";
@@ -129,7 +129,7 @@ $row2 = $result->fetch_assoc();
 	$customers=$_POST['customers'];
 	$category=$_POST['category'];
 	$name=$_POST['name'];
-	$amount=$_POST['amount'];
+	$amount=$_POST['amnt'];
 	$quant=$_POST['quant'];
 	$total=$_POST['total'];
 	$tentered=$_POST['tendered'];
@@ -172,43 +172,6 @@ $row2 = $result->fetch_assoc();
 	}
 	
 	?>
-    
-    <tr>
-    <td align="right"> Date : </td>
-    <td> <input type="text" name="dates" id="txtbox" value="<?php echo "  ". date("Y/m/d")?>" readonly> </td>
-    </tr>
-
-    <tr>
-    <td align="right">Customer Name:</td>
-    <td>
-    <select name="customers" id="txtbox" readonly>
-    
-    <?php
-	require('config.php');
-	$query="SELECT * FROM customers";
-	$result=mysqli_query($db_link, $query);
-	while ($row1=mysqli_fetch_array($result)){?>
-    
-	<option><?php echo $row1['name']; ?></option>
-    					
-	<?php
-}?>
-    
-    </select>
-    </td>
-    </tr>
-    
-    <tr>
-    <td align="right">Category:</td>
-    <td><input type="text" id="txtbox" name="category" value="<?php echo $row['category'];?>" readonly><br></td>
-    </tr>
-    
-    <tr>
-    <td align="right">Product Name:</td>
-    <td><input type="text" id="txtbox" name="name" value="<?php echo $row['name'];?>" readonly><br></td>
-    </tr>
-    
-      
     <!-- Computation starts here -->
     
     <form method="POST">
@@ -273,8 +236,40 @@ $row2 = $result->fetch_assoc();
     </form>
     
     <!-- Computation ends here -->
-    
 
+    <tr>
+    <td align="right"> Date : </td>
+    <td> <input type="text" name="dates" id="txtbox" value="<?php echo "  ". date("Y/m/d")?>" readonly> </td>
+    </tr>
+
+    <tr>
+    <td align="right">Customer Name:</td>
+    <td>
+    <select name="customers" id="txtbox" readonly>
+    
+    <?php
+	$query="SELECT * FROM customers";
+	$result=mysqli_query($db_link, $query);
+	while ($row1=mysqli_fetch_array($result)){?>
+    
+	<option><?php echo $row1['name']; ?></option>
+    					
+	<?php
+}?>
+    
+    </select>
+    </td>
+    </tr>
+    
+    <tr>
+    <td align="right">Category:</td>
+    <td><input type="text" id="txtbox" name="category" value="<?php echo $row['category'];?>" readonly><br></td>
+    </tr>
+    
+    <tr>
+    <td align="right">Product Name:</td>
+    <td><input type="text" id="txtbox" name="name" value="<?php echo $row['name'];?>" readonly><br></td>
+    </tr>
     <br>
     <tr  align="center">
     <td>&nbsp;  </td>
@@ -307,12 +302,10 @@ $row2 = $result->fetch_assoc();
         <th style="border-bottom:1px solid #333;"> Name </th>
         <th style="border-bottom:1px solid #333;"> Price </th>
         <th style="border-bottom:1px solid #333;"> Quantity Left </th>
-        <th style="border-bottom:1px solid #333;"> Supplier </th>
         <th style="border-bottom:1px solid #333;"> Pick Order </th>
       </tr>
       
        <?php
-require('config.php');
 $query="SELECT * FROM products";
 $result=mysqli_query($db_link, $query);
 while ($row=mysqli_fetch_array($result)){?>
@@ -322,7 +315,6 @@ while ($row=mysqli_fetch_array($result)){?>
         <td style="border-bottom:1px solid #333;"> <?php echo $row['name']; ?> </td>
         <td style="border-bottom:1px solid #333;">Rs. <?php echo $row['retail']; ?> </td>
         <td style="border-bottom:1px solid #333;"> <?php echo $row['quantity']; ?> pcs. </td>
-        <td style="border-bottom:1px solid #333;"> <?php echo $row['supplier']; ?> </td>
         <td style="border-bottom:1px solid #333;">
         
         

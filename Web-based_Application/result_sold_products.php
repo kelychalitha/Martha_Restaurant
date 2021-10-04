@@ -1,3 +1,6 @@
+<?php include 'config.php';?>
+<?php include 'main_template.php';?>
+
 <!DOCTYPE html
     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -18,69 +21,11 @@ function toggle_visibility(id) {
 }
 </script>
 
-<body>
-
-    <?php
-session_start();
-if(!isset($_SESSION['username'])){
-	header('location:login.php');
-	}
-?>
+    <body>
 
     <div id="container">
-        <div id="header">
-            <table cellspacing="0" width="100%" border="0" cellpadding="20px">
-                <tr>
-                    <td width="56%">
-                        <table width="41%" border="0" cellspacing="0" cellpadding="0">
-                            <tr>
-                                <th scope="col">
-                                    <h1>MAR<span style="color:red;">THA</span></h1>
-                                </th>
-                            </tr>
-                        </table>
-                    </td>
-                    <td style="font-size:14px;">
-                        <table width="93%" border="0" cellspacing="0" cellpadding="0">
-                            <tr>
-                                <th scope="col">Welcome: <?php echo $_SESSION['access'];?></th>
-                                <th scope="col"><?php
-			$Today = date('y:m:d',time());
-			$new = date('l, F d, Y', strtotime($Today));
-			echo $new;
-			?></th>
-                                <th scope="col" width="20px"><a href="logout.php">
-                                        <input type="button" id="btnadd" value="Logout" align="middle" />
-                                    </a></th>
-                            </tr>
-                        </table>
-                    </td>
-                </tr>
-
-            </table>
-        </div>
-
+        
         <br><br><br><br><br>
-        <!-- NavBar -->
-        <div class="topnav" id="myTopnav">
-            <a href="index.php" class="active">Home</a>
-            <a href="sales.php">Sales</a>
-            <a href="products.php">Products</a>
-            <a href="customers.php">Customers</a>
-            <a href="supplier.php">Suppliers</a>
-            <div class="dropdown">
-                <button class="dropbtn">Sales Report
-                    <i class="fa fa-caret-down"></i>
-                </button>
-                <div class="dropdown-content">
-                    <a href="salesreport.php">Sales Summary</a>
-                    <a href="result_sold_products.php">Most Sold Products</a>
-                </div>
-            </div>
-            <a href="javascript:void(0);" style="font-size:15px;" class="icon" onclick="myFunction()">&#9776;</a>
-
-        </div>
-        <br>
 
         <table width="80%" border="0" align="center" cellpadding="0" cellspacing="0">
 
@@ -94,11 +39,6 @@ if(!isset($_SESSION['username'])){
                             name="search" />
                     </form>
 
-                </td>
-
-                <td width="131" height="37" align="right">
-                    <a href="javascript:void(0)" onclick="toggle_visibility('popup-box1')"><input type="button"
-                            id="btnadd" value="+ Add Products" /></a>
                 </td>
             </tr>
 
@@ -126,7 +66,6 @@ if(!isset($_SESSION['username'])){
                     </tr>
           <!--searching products by category or name or dates-->
                     <?php
-					include 'config.php';
 					
 					if(isset($_GET['search'])){
 						$query = $_GET['query'];
@@ -144,9 +83,6 @@ if(!isset($_SESSION['username'])){
                         <td style="border-bottom:1px solid #333;"> <?php echo $row1['dates']; ?> </td>
                         <td style="border-bottom:1px solid #333;"> <?php echo $row1['quantity']; ?> pcs. </td>
                         <td style="border-bottom:1px solid #333;">
-
-
-
                         </td>
                     </tr>
                     <!--if no result, display no records-->
@@ -165,17 +101,6 @@ if(!isset($_SESSION['username'])){
         </tr>
         </table>
         <br><br><br>
-        <div id="bdcontainer"></div>
-        <!--Footer-->
-        <div id="footer">
-            <table border="0" cellpadding="15px" align="center" ;
-                style="size: 12px; font-family: 'Comic Sans MS', cursive; color: #FFF; font-size: 12px;">
-                <tr>
-                    <td>
-                        Martha Restaurant &copy; 2021 </td>
-                </tr>
-            </table>
-        </div>
 
     </div>
 
@@ -233,40 +158,25 @@ if(!isset($_SESSION['username'])){
                                 <select name="supplier" id="txtbox">
 
                                     <?php
-            require('config.php');
             $query="SELECT suppliername FROM supplier";
             $result1=mysqli_query($db_link, $query);
             while ($row1=mysqli_fetch_array($result1)){?>
                                     <option><?php echo $row1['suppliername']; ?></option>
                                     <?php
-}?>
+                                    }?>
                                 </select>
                             </td>
                         </tr>
 
                         <br>
-                        <tr align="left">
-                            <td>&nbsp; </td>
-                            <td><br><input type="SUBMIT" id="btnnav" value="Submit"></a></td>
-                        </tr>
-
-                    </table>
-                </form>
-
+                            <tr align="left">
+                                <td>&nbsp; </td>
+                                <td><br><input type="SUBMIT" id="btnnav" value="Submit"></a></td>
+                            </tr>
+                        </table>
+                    </form>
+                </div>
             </div>
         </div>
-    </div>
-    <!--NavBar-->
-    <script>
-    function myFunction() {
-        var x = document.getElementById("myTopnav");
-        if (x.className === "topnav") {
-            x.className += " responsive";
-        } else {
-            x.className = "topnav";
-        }
-    }
-    </script>
-</body>
-
+    </body>
 </html>

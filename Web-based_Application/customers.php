@@ -1,3 +1,6 @@
+<?php include 'config.php';?>
+<?php include 'main_template.php';?>
+
 <!DOCTYPE html
     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -20,67 +23,9 @@ function toggle_visibility(id) {
 
 <body>
 
-    <?php
-session_start();
-if(!isset($_SESSION['username'])){
-	header('location:login.php');
-	}
-?>
-
     <div id="container">
-        <div id="header">
-            <table cellspacing="0" width="100%" border="0" cellpadding="20px">
-                <tr>
-                    <td width="56%">
-                        <table width="41%" border="0" cellspacing="0" cellpadding="0">
-                            <tr>
-                                <th scope="col">
-                                    <h1>MAR<span style="color:red;">THA</span></h1>
-                                </th>
-                        </table>
-                    </td>
-                    <td style="font-size:14px;">
-                        <table width="93%" border="0" cellspacing="0" cellpadding="0">
-                            <tr>
-                                <th scope="col">Welcome: <?php echo $_SESSION['access'];?></th>
-                                <th scope="col"><?php
-			$Today = date('y:m:d',time());
-			$new = date('l, F d, Y', strtotime($Today));
-			echo $new;
-			?></th>
-                                <th scope="col" width="20px"><a href="logout.php">
-                                        <input type="button" id="btnadd" value="Logout" align="middle" />
-                                    </a></th>
-                            </tr>
-                        </table>
-                    </td>
-                </tr>
-
-            </table>
-        </div>
-
+        
         <br><br><br><br><br>
-        <!-- NavBar-->
-        <div class="topnav" id="myTopnav">
-            <a href="index.php" class="active">Home</a>
-            <a href="sales.php">Sales</a>
-            <a href="products.php">Products</a>
-            <a href="customers.php">Customers</a>
-            <a href="supplier.php">Suppliers</a>
-            <div class="dropdown">
-                <button class="dropbtn">Sales Report
-                    <i class="fa fa-caret-down"></i>
-                </button>
-                <div class="dropdown-content">
-                    <a href="salesreport.php">Sales Summary</a>
-                    <a href="result_sold_products.php">Most Sold Products</a>
-                </div>
-            </div>
-            <a href="javascript:void(0);" style="font-size:15px;" class="icon" onclick="myFunction()">&#9776;</a>
-
-        </div>
-
-        <br>
 
         <table width="80%" border="0" align="center" cellpadding="0" cellspacing="0">
 
@@ -126,13 +71,10 @@ if(!isset($_SESSION['username'])){
                         <th style="border-bottom:1px solid #333;"> Contact </th>
                         <th style="border-bottom:1px solid #333;"> Address </th>
                         <th style="border-bottom:1px solid #333;"> Note </th>
-                        <th style="border-bottom:1px solid #333;"> Action </th>
                     </tr>
 
 
-
                     <?php
-require('config.php');
 $query="SELECT * FROM customers";
 $result=mysqli_query($db_link, $query);
 while ($row=mysqli_fetch_array($result)){?>
@@ -143,11 +85,6 @@ while ($row=mysqli_fetch_array($result)){?>
                         <td style="border-bottom:1px solid #333;"> <?php echo $row['address']; ?> </td>
                         <td style="border-bottom:1px solid #333;"> <?php echo $row['note']; ?> </td>
                         <td style="border-bottom:1px solid #333;">
-
-                            <a href="delete_customer.php?id=<?php echo md5($row['id']);?>"><input type="button"
-                                    value="Delete"
-                                    style="width:15; height:20; color:#FFF; font-family: 'Comic Sans MS', cursive; background: #f44336; border:1px solid #900; border-radius:3px;"></a>
-
                         </td>
                     </tr>
                     <?php
@@ -159,22 +96,10 @@ while ($row=mysqli_fetch_array($result)){?>
         </tr>
         </table>
         <br><br><br>
-        <div id="bdcontainer"></div>
-        <!--Footer-->
-        <div id="footer">
-            <table border="0" cellpadding="15px" align="center" ;
-                style="size: 12px; font-family: 'Comic Sans MS', cursive; color: #FFF; font-size: 12px;">
-                <tr>
-                    <td>
-                        Martha Restaurant &copy; 2021
-                    </td>
-                </tr>
-            </table>
-        </div>
+        
 
     </div>
-    <!--End Footer-->
-
+    
     <div id="popup-box1" class="popup-position">
         <div id="popup-wrapper">
             <div id="popup-container">
@@ -226,18 +151,6 @@ while ($row=mysqli_fetch_array($result)){?>
             </div>
         </div>
     </div>
-    <!--NavBar-->
-    <script>
-    function myFunction() {
-        var x = document.getElementById("myTopnav");
-        if (x.className === "topnav") {
-            x.className += " responsive";
-        } else {
-            x.className = "topnav";
-        }
-    }
-    </script>
-    <!--End-->
 </body>
 
 </html>
