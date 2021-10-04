@@ -20,7 +20,7 @@ Installation Guide
 
 Login details
 
-User Name : admin
+User Name : waiter
 
-Password : admin123
+Password : waiter
 
