@@ -16,7 +16,7 @@ Installation Guide
 05. after import that project database to new database.
 06. Finally, run the project, localhost/foldername/foldername...
 
-=============================================================================
+============================================================================
 
 Login details
 
